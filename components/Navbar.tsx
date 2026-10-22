@@ -73,7 +73,7 @@ export default function Navbar() {
                 Bhakti
               </span>
               <span className="text-[10px] tracking-widest uppercase font-semibold text-amber-700/80 -mt-0.5">
-                India&apos;s Sacred Shrines
+               Bringing You Closer to God, Every Day
               </span>
             </div>
           </Link>

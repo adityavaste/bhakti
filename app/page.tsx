@@ -359,21 +359,7 @@ export default function App() {
                   </Link>
                 </div>
 
-                {/* Quick Trust Highlights */}
-                <div className="pt-6 border-t border-stone-200/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
-                  <div>
-                    <p className="text-2xl font-serif font-bold text-amber-900">500+</p>
-                    <p className="text-xs text-stone-600 mt-0.5">Documented Temples</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-serif font-bold text-amber-900">Official</p>
-                    <p className="text-xs text-stone-600 mt-0.5">Trust Video Feeds</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-serif font-bold text-amber-900">Zero Ads</p>
-                    <p className="text-xs text-stone-600 mt-0.5">Pure Spiritual Focus</p>
-                  </div>
-                </div>
+               
               </div>
 
               {/* Right Visual Card Column */}
