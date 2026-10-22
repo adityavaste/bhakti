@@ -1,15 +1,13 @@
-// app/manifest.ts
-import type { MetadataRoute } from 'next';
 
+import type { MetadataRoute } from 'next';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'bhakti',
     short_name: 'darshan',
-    description: 'An awesome Next.js Progressive Web App',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#000000',
+    background_color: '#b83808', // Matches your icon's deep saffron background
+    theme_color: '#b83808',
     icons: [
       {
         src: '/icons/icon-192x192.png',
@@ -25,7 +23,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/icons/icon-512x512.png',
         sizes: '512x512',
         type: 'image/png',
-        purpose: 'maskable', // Crucial for Android adaptive icons
+        purpose: 'maskable',
       },
     ],
   };
