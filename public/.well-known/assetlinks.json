@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.vercel.bhakti_sigma.twa",
+        "sha256_cert_fingerprints": ["42:13:AB:AA:CF:59:C5:F9:B8:CE:77:36:DB:6E:88:74:DA:86:82:70:FA:93:B6:26:95:97:4D:19:A6:6D:DE:49"]
+      }
+    }]
