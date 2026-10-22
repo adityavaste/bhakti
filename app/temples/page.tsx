@@ -57,7 +57,7 @@ const ALL_TEMPLES: TempleDetail[] = [
     architecturalStyle: "Hemadpanthi / Maratha",
     century: "12th Century CE",
     image:
-      "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=800&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb-PKt6q8Xv0Zw63qBiUM9DN8lyQORkelDqhuM7REp-A&s=10",
     liveAvailable: true,
     liveSlug: "pandharpur",
     bestTimeToVisit: "Ashadhi & Kartiki Ekadashi (July - Nov)",
@@ -79,7 +79,7 @@ const ALL_TEMPLES: TempleDetail[] = [
     architecturalStyle: "Dravidian Architecture",
     century: "9th Century CE onwards",
     image:
-      "https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?auto=format&fit=crop&w=800&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1sOdUilUJMp69rIUA8ibHIiZVVG0vOpFbhzm561c0lw&s=10",
     liveAvailable: true,
     liveSlug: "tirupati",
     bestTimeToVisit: "September to February (Brahmotsavam in Sept/Oct)",
@@ -101,7 +101,7 @@ const ALL_TEMPLES: TempleDetail[] = [
     architecturalStyle: "Nagara / Modern Corridor",
     century: "Rebuilt 1780 by Ahilyabai Holkar",
     image:
-      "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=800&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhMSrdFNejy9P1Uua7RVig2mahA6oqpbSULTSs0vtLLQ&s=10",
     liveAvailable: true,
     liveSlug: "kashi",
     bestTimeToVisit: "October to March (Maha Shivaratri & Dev Deepawali)",
@@ -123,7 +123,7 @@ const ALL_TEMPLES: TempleDetail[] = [
     architecturalStyle: "Modern Multi-tiered Temple",
     century: "Founded 1801 CE",
     image:
-      "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx9Adq9kKII6pQN9PpMwClUolzbqmCAsSlLfSIso2oTg&s=10",
     liveAvailable: true,
     liveSlug: "siddhivinayak",
     bestTimeToVisit: "Angarki Chaturthi & Ganeshotsav",
@@ -145,7 +145,7 @@ const ALL_TEMPLES: TempleDetail[] = [
     architecturalStyle: "Kalinga Architecture",
     century: "1161 CE by Anantavarman",
     image:
-      "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=800&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE5EHJOJQ43YGcCSpKzS-1Dv23vYPr7SiDmjLXVFTWnQ&s=10",
     liveAvailable: false,
     bestTimeToVisit: "November to February (Ratha Yatra in June/July)",
     dressCode: "Traditional conservative dress. Foreign nationals restricted to outer gate as per temple customs.",
@@ -187,7 +187,7 @@ const ALL_TEMPLES: TempleDetail[] = [
     architecturalStyle: "Chalukya / Kailash Mahameru Prasada",
     century: "Rebuilt 1951 CE",
     image:
-      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvamPVS96j__kI2ezE1HmCslSBoz7ZKmPKhSxwtXqoUw&s=10",
     liveAvailable: true,
     bestTimeToVisit: "September to March",
     dressCode: "Modest and neat Indian clothing.",
@@ -208,7 +208,7 @@ const ALL_TEMPLES: TempleDetail[] = [
     architecturalStyle: "Nilachal Style (Beehive Dome)",
     century: "Rebuilt 1565 CE",
     image:
-      "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=800&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-amAlO3EDcD6GdTK2zzQJxqqIyoXpLDekWGkBZBRqHw&s",
     liveAvailable: false,
     bestTimeToVisit: "October to April (Ambubachi Mela in June)",
     dressCode: "Traditional and conservative Indian attire.",
@@ -229,7 +229,7 @@ const ALL_TEMPLES: TempleDetail[] = [
     architecturalStyle: "Modern Marble Sanctum",
     century: "Early 20th Century CE",
     image:
-      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxiPAMQhkBLUGcAtp51vaLDPrBtVggU46GCBFWezEscA&s=10",
     liveAvailable: true,
     liveSlug: "shirdi",
     bestTimeToVisit: "All year round; Guru Purnima & Dussehra special celebrations",
