@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister"; // if registering SW
 import "./globals.css";
+import TopBar from "@/components/Top-bar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col bg-[#FDFBF7] text-[#2D1609] antialiased`}>
         {/* Client-side logic runs inside client component wrappers */}
         <ServiceWorkerRegister />
+        <TopBar />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

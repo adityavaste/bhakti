@@ -80,7 +80,7 @@ const TEMPLES_DATA: Temple[] = [
       { name: "Kakad Aarti", time: "04:30 AM", completed: true },
       { name: "Panchamrut Snan", time: "06:00 AM", completed: true },
       { name: "Madhyanha Bhog", time: "11:00 AM", completed: true },
-      { name: "Dhoop Aarti", time: "09:30 PM", completed: false, current: true },
+      { name: "Dhoop Aarti", time: "06:30 PM", completed: false, current: true },
       { name: "Shej Aarti", time: "10:30 PM", completed: false },
     ],
     about: "The primary spiritual sanctum of the Varkari tradition on the banks of Chandrabhaga.",
