@@ -2,7 +2,7 @@
       "relation": ["delegate_permission/common.handle_all_urls"],
       "target": {
         "namespace": "android_app",
-        "package_name": "app.vercel.bhakti_sigma.twa",
-        "sha256_cert_fingerprints": ["B2:6F:33:E6:1C:E0:BF:F3:10:27:20:1F:AD:93:7E:28:A6:B3:85:F1:73:EF:BE:8B:37:57:FC:88:74:96:02:0E"]
+        "package_name": "cloud.devopsexpert.twa",
+        "sha256_cert_fingerprints": ["E1:A2:F2:4E:72:7C:C5:E9:DA:24:82:55:D9:7D:87:31:B2:8D:20:CD:D3:2B:8E:AF:DD:A1:13:6A:A8:B2:B0:57"]
       }
     }]

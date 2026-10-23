@@ -1,13 +1,12 @@
-
-import type { MetadataRoute } from 'next';
-export default function manifest(): MetadataRoute.Manifest {
+// app/manifest.ts
+export default function manifest() {
   return {
     name: 'bhakti',
     short_name: 'darshan',
     start_url: '/',
-    display: 'standalone',
-    background_color: '#b83808', // Matches your icon's deep saffron background
-    theme_color: '#b83808',
+    display: 'standalone' as const,
+    background_color: '#ffffff', // Pure white splash background
+    theme_color: '#ffffff',
     icons: [
       {
         src: '/icons/icon-192x192.png',
@@ -23,7 +22,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/icons/icon-512x512.png',
         sizes: '512x512',
         type: 'image/png',
-        purpose: 'maskable',
+        purpose: 'maskable' as const,
       },
     ],
   };
