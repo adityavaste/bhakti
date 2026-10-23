@@ -1,5 +1,6 @@
 "use client";
 
+import LazyYouTubePlayer from "@/components/darshan/LazyYouTubePlayer";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
@@ -451,26 +452,36 @@ export default function LiveDarshanPage() {
           <div className="lg:col-span-8 space-y-5">
             {/* Primary Video Player */}
             <div className="relative rounded-2xl overflow-hidden bg-black shadow-xl border border-amber-900/30">
-              <div className="aspect-video w-full bg-[#180A0B] relative flex items-center justify-center">
-                {selectedTemple.live && selectedTemple.embedUrl ? (
-                  <iframe
-                    key={selectedTemple.id}
-                    src={`${selectedTemple.embedUrl}${
-                      selectedTemple.embedUrl.includes("?") ? "&" : "?"
-                    }autoplay=1&mute=1`}
-                    title={`${selectedTemple.name} Live Stream`}
-                    className="h-full w-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                ) : (
-                  <div className="text-center p-6 text-white space-y-2">
-                    <Clock className="w-8 h-8 text-amber-400 mx-auto" />
-                    <h3 className="font-serif font-bold text-lg">{selectedTemple.name}</h3>
-                    <p className="text-xs text-stone-400">Private sanctum rites in progress.</p>
-                  </div>
-                )}
-              </div>
+             {/* Video / Fallback Area */}
+<div className="aspect-video w-full bg-[#180A0B] relative flex items-center justify-center">
+  {selectedTemple.live && selectedTemple.embedUrl ? (
+    <LazyYouTubePlayer
+      templeId={selectedTemple.id}
+      videoIdOrUrl={selectedTemple.embedUrl}
+      title={`${selectedTemple.name} Live Stream`}
+    />
+  ) : (
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 text-center">
+      <img
+        src={selectedTemple.thumbnail}
+        alt={selectedTemple.name}
+        className="absolute inset-0 w-full h-full object-cover opacity-25 filter blur-xs"
+      />
+      <div className="relative z-10 max-w-md space-y-3">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-900/60 text-amber-200 border border-amber-500/30 text-xs">
+          <Clock className="w-3.5 h-3.5" />
+          <span>Private Sanctum Rites in Progress</span>
+        </div>
+        <h3 className="text-xl font-serif font-bold text-white">
+          {selectedTemple.name}
+        </h3>
+        <p className="text-xs text-[#D5C2B4]">
+          Live broadcast resumes during the upcoming scheduled aarti.
+        </p>
+      </div>
+    </div>
+  )}
+</div>
 
               {/* Header Info Below Player */}
               <div className="p-4 bg-[#230D0F] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-white/10">
