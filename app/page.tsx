@@ -44,8 +44,8 @@ const TEMPLES_DATA = [
     nextAarti: 'Kakad Aarti (04:30 AM)',
     currentDarshan: 'Nitya Pooja & Mukh Darshan',
     image: 'https://photos.mytemplemypride.com/ef0566c4-03b9-4186-aeb8-1b55e119a952/89c9c005-649a-4238-8b30-9897a5ea0928.png',
-    embedVideoId: 'zIlth8iGL_w', // Standard embed fallback placeholder
-    officialChannelUrl: 'https://www.youtube.com/live/zIlth8iGL_w?si=fPtz5MzJxLN9HEG0',
+    embedVideoId: "28EHI-CwFSA",
+officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
     description: 'The supreme abode of Lord Vitthal (Vithoba) and Mother Rukmini on the banks of Chandrabhaga river.',
     timings: [
       { name: 'Kakad Aarti', time: '04:30 AM' },
