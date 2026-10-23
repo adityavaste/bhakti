@@ -3,6 +3,6 @@
       "target": {
         "namespace": "android_app",
         "package_name": "cloud.devopsexpert.twa",
-        "sha256_cert_fingerprints": ["E1:A2:F2:4E:72:7C:C5:E9:DA:24:82:55:D9:7D:87:31:B2:8D:20:CD:D3:2B:8E:AF:DD:A1:13:6A:A8:B2:B0:57"]
+        "sha256_cert_fingerprints": ["05:C9:01:E4:C9:1B:F9:2B:C0:D5:63:85:C0:4A:48:4A:0B:22:1E:A8:E4:75:BA:C1:7F:72:45:11:DE:52:AC:29"]
       }
     }]
