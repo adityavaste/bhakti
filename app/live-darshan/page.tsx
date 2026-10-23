@@ -74,8 +74,8 @@ const TEMPLES_DATA: Temple[] = [
     viewers: 28420,
     verifiedTrust: "Shree Vitthal Rukmini Mandir Samiti",
     thumbnail: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80",
-    embedUrl: "https://www.youtube.com/embed/zIlth8iGL_w",
-    officialYoutube: "https://www.youtube.com/live/zIlth8iGL_w",
+    embedUrl: "https://www.youtube.com/embed/28EHI-CwFSA",
+officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
     aartis: [
       { name: "Kakad Aarti", time: "04:30 AM", completed: true },
       { name: "Panchamrut Snan", time: "06:00 AM", completed: true },
