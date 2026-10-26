@@ -76,7 +76,7 @@ const TEMPLES_DATA: Temple[] = [
     currentRitual: "Dhoop Aarti & Darshan",
     viewers: 28420,
     verifiedTrust: "Shree Vitthal Rukmini Mandir Samiti",
-    thumbnail: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgPRe_AbXY_qOx7le34fmCagoX5K436IYKzJBvIiKqUw&s=10",
     embedUrl: "https://www.youtube.com/embed/0VfT9g20lMY",
     officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY",
     channelId: "UC4QBKRPvGu_jN8FsOXwGSzQ",
@@ -101,7 +101,7 @@ const TEMPLES_DATA: Temple[] = [
     currentRitual: "Sandhya Shringar & Ganga Aaradhana",
     viewers: 45110,
     verifiedTrust: "Shri Kashi Vishwanath Temple Trust",
-    thumbnail: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz66Z0-lfOltyDPYmHbwKiz-aQVqiLDqZz6ZDWHbp2tA&s=10",
     embedUrl: "https://www.youtube.com/embed/WPZ0xL0-sKs",
     officialYoutube: "https://www.youtube.com/live/WPZ0xL0-sKs",
     channelId: "UC6v3e7eS-kH_F9mRjG15t6g",
@@ -126,7 +126,7 @@ const TEMPLES_DATA: Temple[] = [
     currentRitual: "Sarvadarsanam & Sahasra Deepalankara",
     viewers: 62800,
     verifiedTrust: "Tirumala Tirupati Devasthanams (TTD)",
-    thumbnail: "https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-ipMhrWS3b4kGIbV3IYINZ11IuETufiX4c5g_FLCuqQ&s=10",
     embedUrl: "https://www.youtube.com/embed/EMMWSBPvbrE",
     officialYoutube: "https://www.youtube.com/live/EMMWSBPvbrE",
     channelId: "UCoj525WIszT7Mnp7seDPsTA",
@@ -151,7 +151,7 @@ const TEMPLES_DATA: Temple[] = [
     currentRitual: "Live Samadhi Mandir Darshan",
     viewers: 24500,
     verifiedTrust: "Shri Saibaba Sansthan Trust (Shirdi)",
-    thumbnail: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkuYsuziY8VvaQ-hpjYMisEedLL5WONQV3Z6WYRZaA3g&s=10",
     embedUrl: "https://www.youtube.com/embed/FIyZjCazWdI",
     officialYoutube: "https://www.youtube.com/@ShirdiSaiSansthanLive",
     channelId: "UC4gP1A3k-91gG3PqI6bVjEQ",
@@ -393,7 +393,7 @@ export default function LiveDarshanPage() {
               <span>Live Darshan Sanctuary</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#2A1214] mt-1">
-              Live Sanctum Darshan
+              Live Darshan
             </h1>
             <p className="text-sm text-[#6B5548] mt-1">
               Watch official live feeds, offer pushpa, ring temple bells, and set guaranteed aarti alarms.

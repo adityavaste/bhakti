@@ -328,7 +328,7 @@ export default function App() {
               <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100/80 border border-amber-300/60 text-amber-900 text-xs font-semibold tracking-wide shadow-sm">
                   <Sun className="w-3.5 h-3.5 text-amber-600 animate-spin" style={{ animationDuration: '10s' }} />
-                  <span>CONNECTING MILLIONS TO SACRED ROOTS</span>
+                  <span>Where Faith Connects Us All</span>
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-[#381014] tracking-tight leading-[1.15]">
@@ -449,7 +449,7 @@ export default function App() {
                   Direct Sanctum Broadcasts
                 </div>
                 <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#381014]">
-                  Live Darshan from Sacred Temples
+                  Live Darshan from Temples
                 </h2>
                 <p className="text-stone-600 text-sm sm:text-base mt-2 max-w-xl">
                   Experience real-time spiritual presence. Feeds are sourced directly from verified temple trusts and official YouTube streams.
