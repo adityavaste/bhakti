@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link';
-import HomeLiveDarshanSection from "@/components/home/HomeLiveDarshanSection";
+
 import Navbar from '@/components/Navbar';
 import React, { useState, useMemo } from 'react';
 import {
@@ -438,7 +438,7 @@ export default function App() {
           </div>
         </section>
 
-        <HomeLiveDarshanSection />
+       
 
         {/* SECTION: Live Darshan Section (Crucial Core Feature) */}
         <section id="live-darshan" className="py-16 sm:py-24 bg-[#F5EDE1]/50 border-y border-amber-900/10 relative">
