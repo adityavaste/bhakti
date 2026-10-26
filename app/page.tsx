@@ -2,6 +2,7 @@
 import Link from 'next/link';
 
 import Navbar from '@/components/Navbar';
+import LiveStreamPlayer from '@/components/darshan/LiveStreamPlayer';
 import React, { useState, useMemo } from 'react';
 import {
   Landmark,
@@ -45,7 +46,8 @@ const TEMPLES_DATA = [
     currentDarshan: 'Nitya Pooja & Mukh Darshan',
     image: 'https://photos.mytemplemypride.com/ef0566c4-03b9-4186-aeb8-1b55e119a952/89c9c005-649a-4238-8b30-9897a5ea0928.png',
     embedVideoId: "0VfT9g20lMY",
-officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY?si=k5iFO96lhsKrmZ7q",
+    officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY?si=k5iFO96lhsKrmZ7q",
+    channelId: "UC4QBKRPvGu_jN8FsOXwGSzQ",
     description: 'The supreme abode of Lord Vitthal (Vithoba) and Mother Rukmini on the banks of Chandrabhaga river.',
     timings: [
       { name: 'Kakad Aarti', time: '04:30 AM' },
@@ -66,8 +68,9 @@ officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY?si=k5iFO96lhsKrmZ7q",
     nextAarti: 'Suprabhatam (03:00 AM)',
     currentDarshan: 'Sarva Darshanam Live',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXwsxCKMl_QxmqRbRG_3M_9U3KQLT0MMBIvvjcR49wlQ&s=10',
-    embedVideoId: 'XxdarKTmJ8c',
-    officialChannelUrl: 'https://www.youtube.com/live/XxdarKTmJ8c?si=1Eqdt1GtTqqW5gXh',
+    embedVideoId: 'EMMWSBPvbrE',
+    officialChannelUrl: 'https://www.youtube.com/live/EMMWSBPvbrE',
+    channelId: "UCoj525WIszT7Mnp7seDPsTA",
     description: 'The sacred Seven Hills of Tirumala, abode of Lord Sri Venkateswara (Balaji), Kaliyuga Pratyaksha Daivam.',
     timings: [
       { name: 'Suprabhata Seva', time: '03:00 AM' },
@@ -89,7 +92,7 @@ officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY?si=k5iFO96lhsKrmZ7q",
     currentDarshan: 'Charan Sparsh & Abhishek',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAzc2VlWVxP24wLti9GGvqP3SnyfHJ3xrlEnynoV3_Lg&s=10',
     embedVideoId: "oWdSHxrwcBI",
-officialYoutube: "https://www.youtube.com/live/oWdSHxrwcBI?si=EzenLmAlPVsLWzTO",
+    officialYoutube: "https://www.youtube.com/live/oWdSHxrwcBI?si=EzenLmAlPVsLWzTO",
     description: 'Renowned six-storey sanctuary dedicated to Lord Ganesha, fulfiller of heartfelt wishes.',
     timings: [
       { name: 'Kakad Aarti', time: '05:30 AM' },
@@ -111,7 +114,8 @@ officialYoutube: "https://www.youtube.com/live/oWdSHxrwcBI?si=EzenLmAlPVsLWzTO",
     currentDarshan: 'Ganga Snan & Shringar Darshan',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtZ0AuANV-sRg-bLsA-8WXvaJLlF8SW7I8Hf64Fgj8jg&s=10',
     embedVideoId: "WPZ0xL0-sKs",
-officialYoutube: "https://www.youtube.com/live/WPZ0xL0-sKs?si=N2dC3cm2_KTcvjEk",
+    officialYoutube: "https://www.youtube.com/live/WPZ0xL0-sKs?si=N2dC3cm2_KTcvjEk",
+    channelId: "UC6v3e7eS-kH_F9mRjG15t6g",
     description: 'Sacred golden-spired shrine of Lord Shiva in the eternal holy city of Kashi on the Ganga ghats.',
     timings: [
       { name: 'Mangala Aarti', time: '03:00 AM' },
@@ -133,7 +137,7 @@ officialYoutube: "https://www.youtube.com/live/WPZ0xL0-sKs?si=N2dC3cm2_KTcvjEk",
     currentDarshan: 'Stream restarts during morning ritual',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGHyzXPrc9825due8eV48mtBhD01PZ5FS2YFgMCXirEQ&s=10',
     embedVideoId: "1aAU3moRfGw",
-officialYoutube: "https://www.youtube.com/live/1aAU3moRfGw?si=A7E7Pq-fU2WQXyWq",
+    officialYoutube: "https://www.youtube.com/live/1aAU3moRfGw?si=A7E7Pq-fU2WQXyWq",
     description: 'Ancient Char Dham sanctuary of Lord Jagannath, Balabhadra, and Devi Subhadra.',
     timings: [
       { name: 'Dwaraphita & Mangal Aarti', time: '05:00 AM' },
@@ -154,8 +158,9 @@ officialYoutube: "https://www.youtube.com/live/1aAU3moRfGw?si=A7E7Pq-fU2WQXyWq",
     nextAarti: 'Dhoop Aarti (Sunset)',
     currentDarshan: 'Samadhi Mandir Darshan',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlDhJDDA5usMIXTkVdietvZ1E1fhXtsC9Z4MOriWrTaA&s=10',
-    embedVideoId: "MHEqo6oOwWE",
+    embedVideoId: "FIyZjCazWdI",
     officialChannelUrl: 'https://www.youtube.com/@ShirdiSaiSansthanLive',
+    channelId: "UC4gP1A3k-91gG3PqI6bVjEQ",
     description: 'The holy abode and samadhi of Sadguru Sai Baba, welcoming millions of all faiths.',
     timings: [
       { name: 'Kakad Aarti', time: '04:30 AM' },
@@ -308,10 +313,7 @@ export default function App() {
 
   return (
     <>
-
       <div className="min-h-screen bg-[#FDFBF7] text-[#2D241E] font-sans antialiased selection:bg-amber-100 selection:text-amber-900">
-
-
 
         {/* Hero Section */}
         <section id="hero" className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
@@ -337,7 +339,7 @@ export default function App() {
                 </h1>
 
                 <p className="text-lg sm:text-xl text-stone-700 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                  Connect with India's sacred temples through live darshan, discover spiritual destinations, and plan your next divine journey — all in one peaceful place.
+                  Connect with India&apos;s sacred temples through live darshan, discover spiritual destinations, and plan your next divine journey — all in one peaceful place.
                 </p>
 
                 {/* CTAs */}
@@ -354,12 +356,9 @@ export default function App() {
                     href="/temples"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-stone-800 bg-white/80 hover:bg-white border border-stone-300/80 hover:border-amber-600/50 shadow-sm transition-all"
                   >
-                    
                     <span>Explore Temples</span>
                   </Link>
                 </div>
-
-               
               </div>
 
               {/* Right Visual Card Column */}
@@ -437,8 +436,6 @@ export default function App() {
             </div>
           </div>
         </section>
-
-       
 
         {/* SECTION: Live Darshan Section (Crucial Core Feature) */}
         <section id="live-darshan" className="py-16 sm:py-24 bg-[#F5EDE1]/50 border-y border-amber-900/10 relative">
@@ -599,7 +596,7 @@ export default function App() {
                         </button>
 
                         <a
-                          href={temple.officialChannelUrl}
+                          href={temple.officialYoutube || temple.officialChannelUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-2.5 rounded-xl border border-stone-200 hover:bg-stone-50 text-stone-600 hover:text-stone-900 transition-colors"
@@ -873,8 +870,6 @@ export default function App() {
           </div>
         </section>
 
-
-
         {/* --- MODAL 1: LIVE DARSHAN VIDEO PLAYER MODAL --- */}
         {selectedTemple && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
@@ -898,13 +893,14 @@ export default function App() {
 
               {/* Video Player Container */}
               <div className="relative aspect-video bg-black flex items-center justify-center">
-                {selectedTemple.embedVideoId ? (
-                  <iframe
-                    className="w-full h-full"
-                    src={`https://www.youtube-nocookie.com/embed/${selectedTemple.embedVideoId}?autoplay=1&mute=0`}
+                {selectedTemple.isLive && (selectedTemple.embedVideoId || (selectedTemple as any).channelId) ? (
+                  <LiveStreamPlayer
+                    templeId={selectedTemple.id}
+                    channelId={(selectedTemple as any).channelId}
+                    fallbackVideoId={selectedTemple.embedVideoId}
                     title={`${selectedTemple.name} Official Live Stream`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                    officialYoutube={selectedTemple.officialYoutube || selectedTemple.officialChannelUrl}
+                    thumbnail={selectedTemple.image}
                   />
                 ) : (
                   <div className="text-center p-8 space-y-3">
@@ -914,7 +910,7 @@ export default function App() {
                       The sanctum doors are currently closed for inner shringar pooja. Please tune in during scheduled Aarti timings or visit the official channel.
                     </p>
                     <a
-                      href={selectedTemple.officialChannelUrl}
+                      href={selectedTemple.officialYoutube || selectedTemple.officialChannelUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold uppercase tracking-wider"
@@ -940,7 +936,7 @@ export default function App() {
                   </div>
                   <div className="flex items-center gap-2">
                     <a
-                      href={selectedTemple.officialChannelUrl}
+                      href={selectedTemple.officialYoutube || selectedTemple.officialChannelUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium text-stone-200 transition-colors"
@@ -1082,5 +1078,4 @@ export default function App() {
       </div>
     </>
   );
-
 }
