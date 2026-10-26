@@ -70,7 +70,7 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-2xl font-bold tracking-tight text-[#2D1609] group-hover:text-amber-800 transition-colors">
-                Bhakti
+               Darshan 
               </span>
               <span className="text-[10px] tracking-widest uppercase font-semibold text-amber-700/80 -mt-0.5">
                Bringing You Closer to God, Every Day
