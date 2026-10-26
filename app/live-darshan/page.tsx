@@ -1,6 +1,6 @@
 "use client";
 
-import LazyYouTubePlayer from "@/components/darshan/LazyYouTubePlayer";
+import LiveStreamPlayer from "@/components/darshan/LiveStreamPlayer";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
@@ -43,6 +43,8 @@ export interface Temple {
   officialYoutube: string;
   aartis: AartiItem[];
   about: string;
+  channelId?: string;
+  fallbackVideoId: string;
 }
 
 export interface ActiveAlarm {
@@ -75,8 +77,10 @@ const TEMPLES_DATA: Temple[] = [
     viewers: 28420,
     verifiedTrust: "Shree Vitthal Rukmini Mandir Samiti",
     thumbnail: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80",
-    embedUrl: "https://www.youtube.com/embed/28EHI-CwFSA",
-officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
+    embedUrl: "https://www.youtube.com/embed/0VfT9g20lMY",
+    officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY",
+    channelId: "UC4QBKRPvGu_jN8FsOXwGSzQ",
+   fallbackVideoId: "0VfT9g20lMY",  
     aartis: [
       { name: "Kakad Aarti", time: "04:30 AM", completed: true },
       { name: "Panchamrut Snan", time: "06:00 AM", completed: true },
@@ -86,8 +90,6 @@ officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
     ],
     about: "The primary spiritual sanctum of the Varkari tradition on the banks of Chandrabhaga.",
   },
-
-  
   {
     id: "kashi-vishwanath",
     name: "Shri Kashi Vishwanath Dham",
@@ -102,6 +104,8 @@ officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
     thumbnail: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80",
     embedUrl: "https://www.youtube.com/embed/WPZ0xL0-sKs",
     officialYoutube: "https://www.youtube.com/live/WPZ0xL0-sKs",
+    channelId: "UC6v3e7eS-kH_F9mRjG15t6g",
+    fallbackVideoId: "WPZ0xL0-sKs",
     aartis: [
       { name: "Mangala Aarti", time: "03:00 AM", completed: true },
       { name: "Bhog Aarti", time: "11:30 AM", completed: true },
@@ -125,6 +129,8 @@ officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
     thumbnail: "https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?auto=format&fit=crop&w=1200&q=80",
     embedUrl: "https://www.youtube.com/embed/EMMWSBPvbrE",
     officialYoutube: "https://www.youtube.com/live/EMMWSBPvbrE",
+    channelId: "UCoj525WIszT7Mnp7seDPsTA",
+    fallbackVideoId: "EMMWSBPvbrE",
     aartis: [
       { name: "Suprabhatam", time: "03:00 AM", completed: true },
       { name: "Thomala Seva", time: "05:30 AM", completed: true },
@@ -134,34 +140,33 @@ officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
     ],
     about: "Kali Yuga Vaikuntha located on the sacred seven hills of Seshachalam in Tirumala.",
   },
-
   {
-  id: "banke-bihari-vrindavan",
-  name: "Shri Banke Bihari Temple",
-  deity: "Lord Krishna",
-  category: "Vaishnav",
-  city: "Vrindavan",
-  state: "Uttar Pradesh",
-  live: false,
-  currentRitual: "Daily Darshan",
-  viewers: 0,
-  verifiedTrust: "Shri Banke Bihari Ji Temple",
-  thumbnail: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80",
-  embedUrl: "",
-  officialYoutube: "https://www.youtube.com/results?search_query=Shri+Banke+Bihari+Temple+official+live+darshan",
-  aartis: [
-    { name: "Morning Darshan", time: "07:45 AM", completed: false },
-    { name: "Shringar Darshan", time: "08:00 AM", completed: false },
-    { name: "Rajbhog Aarti", time: "11:00 AM", completed: false },
-    { name: "Evening Darshan", time: "04:30 PM", completed: false },
-    { name: "Shayan Aarti", time: "09:30 PM", completed: false },
-  ],
-  about:
-    "A beloved Krishna temple in Vrindavan, renowned for the enchanting form of Banke Bihari Ji and the deep devotional traditions of Braj.",
-},
+    id: "shirdi-sai-baba",
+    name: "Shri Saibaba Sansthan",
+    deity: "Shirdi Sai Baba",
+    category: "Universal",
+    city: "Shirdi",
+    state: "Maharashtra",
+    live: true,
+    currentRitual: "Live Samadhi Mandir Darshan",
+    viewers: 24500,
+    verifiedTrust: "Shri Saibaba Sansthan Trust (Shirdi)",
+    thumbnail: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80",
+    embedUrl: "https://www.youtube.com/embed/FIyZjCazWdI",
+    officialYoutube: "https://www.youtube.com/@ShirdiSaiSansthanLive",
+    channelId: "UC4gP1A3k-91gG3PqI6bVjEQ",
+   fallbackVideoId: "FIyZjCazWdI",
+    aartis: [
+      { name: "Kakad Aarti", time: "04:30 AM", completed: true },
+      { name: "Madhyan Aarti", time: "12:00 PM", completed: false, current: true },
+      { name: "Dhoop Aarti", time: "sunset", completed: false },
+      { name: "Shej Aarti", time: "10:00 PM", completed: false },
+    ],
+    about: "The sacred Samadhi Mandir of Shri Sai Baba in Shirdi, visited by millions of devotees worldwide for eternal peace and blessings.",
+  },
 ];
 
-// Helper to convert time string (e.g. "04:30 AM" or "9:15 PM") to "HH:MM" in 24hr format
+// Helper to convert time string to 24hr format
 function formatTimeTo24H(timeStr: string): string | null {
   const match = timeStr.trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
   if (!match) return null;
@@ -188,11 +193,10 @@ export default function LiveDarshanPage() {
   const [ringingAlarm, setRingingAlarm] = useState<ActiveAlarm | null>(null);
   const lastFiredMinuteRef = useRef<string>("");
 
-  // Audio Context Ref (Pre-unlocked on user gesture)
+  // Audio Context Ref
   const audioCtxRef = useRef<AudioContext | null>(null);
   const soundLoopIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Initialize and unlock AudioContext on user interaction
   const ensureAudioUnlocked = () => {
     try {
       if (!audioCtxRef.current || audioCtxRef.current.state === "closed") {
@@ -209,7 +213,6 @@ export default function LiveDarshanPage() {
     }
   };
 
-  // Play one single clear temple bell tone
   const playBellChime = useCallback(() => {
     try {
       ensureAudioUnlocked();
@@ -242,7 +245,6 @@ export default function LiveDarshanPage() {
     }
   }, []);
 
-  // Continuous sound loop when alarm is active
   const startAlarmSound = useCallback(() => {
     playBellChime();
     if (soundLoopIntervalRef.current) clearInterval(soundLoopIntervalRef.current);
@@ -257,7 +259,6 @@ export default function LiveDarshanPage() {
     setRingingAlarm(null);
   }, []);
 
-  // Fire an alarm
   const triggerAlarm = useCallback(
     (alarm: ActiveAlarm) => {
       setRingingAlarm(alarm);
@@ -279,23 +280,20 @@ export default function LiveDarshanPage() {
     [startAlarmSound]
   );
 
-  // Load alarms from localStorage on mount
   useEffect(() => {
     try {
       const saved = localStorage.getItem("divine_alarms_v2");
       if (saved) setAlarms(JSON.parse(saved));
-    } catch {}
+    } catch { }
   }, []);
 
-  // Save alarms helper
   const saveAlarms = (updated: ActiveAlarm[]) => {
     setAlarms(updated);
     try {
       localStorage.setItem("divine_alarms_v2", JSON.stringify(updated));
-    } catch {}
+    } catch { }
   };
 
-  // Toggle alarm on an Aarti
   const toggleAlarm = async (
     templeId: string,
     templeName: string,
@@ -338,7 +336,6 @@ export default function LiveDarshanPage() {
     return Boolean(item && item.enabled);
   };
 
-  // Instant 5-Second Test Alarm (for immediate verification)
   const testAlarmIn5Seconds = () => {
     ensureAudioUnlocked();
     if (typeof window !== "undefined" && "Notification" in window) {
@@ -360,7 +357,6 @@ export default function LiveDarshanPage() {
     }, 5000);
   };
 
-  // Active Clock Checker (Runs every second so no time is ever missed)
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
@@ -368,7 +364,6 @@ export default function LiveDarshanPage() {
       const currentMM = String(now.getMinutes()).padStart(2, "0");
       const current24H = `${currentHH}:${currentMM}`;
 
-      // Avoid firing multiple times within the exact same minute
       if (lastFiredMinuteRef.current === current24H) return;
 
       alarms.forEach((alarm) => {
@@ -406,7 +401,6 @@ export default function LiveDarshanPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* 5-Second Test Button */}
             <button
               type="button"
               onClick={testAlarmIn5Seconds}
@@ -452,36 +446,40 @@ export default function LiveDarshanPage() {
           <div className="lg:col-span-8 space-y-5">
             {/* Primary Video Player */}
             <div className="relative rounded-2xl overflow-hidden bg-black shadow-xl border border-amber-900/30">
-             {/* Video / Fallback Area */}
-<div className="aspect-video w-full bg-[#180A0B] relative flex items-center justify-center">
-  {selectedTemple.live && selectedTemple.embedUrl ? (
-    <LazyYouTubePlayer
-      templeId={selectedTemple.id}
-      videoIdOrUrl={selectedTemple.embedUrl}
-      title={`${selectedTemple.name} Live Stream`}
-    />
-  ) : (
-    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 text-center">
-      <img
-        src={selectedTemple.thumbnail}
-        alt={selectedTemple.name}
-        className="absolute inset-0 w-full h-full object-cover opacity-25 filter blur-xs"
-      />
-      <div className="relative z-10 max-w-md space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-900/60 text-amber-200 border border-amber-500/30 text-xs">
-          <Clock className="w-3.5 h-3.5" />
-          <span>Private Sanctum Rites in Progress</span>
-        </div>
-        <h3 className="text-xl font-serif font-bold text-white">
-          {selectedTemple.name}
-        </h3>
-        <p className="text-xs text-[#D5C2B4]">
-          Live broadcast resumes during the upcoming scheduled aarti.
-        </p>
-      </div>
-    </div>
-  )}
-</div>
+              {/* Video / Fallback Area */}
+              <div className="aspect-video w-full bg-[#180A0B] relative flex items-center justify-center">
+                {selectedTemple.live && (selectedTemple.embedUrl || selectedTemple.channelId) ? (
+                  <LiveStreamPlayer
+                    key={selectedTemple.id}
+                    templeId={selectedTemple.id}
+                    channelId={selectedTemple.channelId}
+                    fallbackVideoId={selectedTemple.fallbackVideoId || selectedTemple.embedUrl}
+                    title={`${selectedTemple.name} Live Stream`}
+                    officialYoutube={selectedTemple.officialYoutube}
+                    thumbnail={selectedTemple.thumbnail}
+                  />
+                ) : (
+                  <div className="relative w-full h-full flex flex-col items-center justify-center p-6 text-center">
+                    <img
+                      src={selectedTemple.thumbnail}
+                      alt={selectedTemple.name}
+                      className="absolute inset-0 w-full h-full object-cover opacity-25 filter blur-xs"
+                    />
+                    <div className="relative z-10 max-w-md space-y-3">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-900/60 text-amber-200 border border-amber-500/30 text-xs">
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>Private Sanctum Rites in Progress</span>
+                      </div>
+                      <h3 className="text-xl font-serif font-bold text-white">
+                        {selectedTemple.name}
+                      </h3>
+                      <p className="text-xs text-[#D5C2B4]">
+                        Live broadcast resumes during the upcoming scheduled aarti.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Header Info Below Player */}
               <div className="p-4 bg-[#230D0F] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-white/10">

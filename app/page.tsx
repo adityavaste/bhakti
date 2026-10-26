@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link';
-
+import HomeLiveDarshanSection from "@/components/home/HomeLiveDarshanSection";
 import Navbar from '@/components/Navbar';
 import React, { useState, useMemo } from 'react';
 import {
@@ -44,8 +44,8 @@ const TEMPLES_DATA = [
     nextAarti: 'Kakad Aarti (04:30 AM)',
     currentDarshan: 'Nitya Pooja & Mukh Darshan',
     image: 'https://photos.mytemplemypride.com/ef0566c4-03b9-4186-aeb8-1b55e119a952/89c9c005-649a-4238-8b30-9897a5ea0928.png',
-    embedVideoId: "28EHI-CwFSA",
-officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
+    embedVideoId: "0VfT9g20lMY",
+officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY?si=k5iFO96lhsKrmZ7q",
     description: 'The supreme abode of Lord Vitthal (Vithoba) and Mother Rukmini on the banks of Chandrabhaga river.',
     timings: [
       { name: 'Kakad Aarti', time: '04:30 AM' },
@@ -54,7 +54,7 @@ officialYoutube: "https://www.youtube.com/live/28EHI-CwFSA?si=DTb50Rr04IqEFWq-",
       { name: 'Shej Aarti', time: '11:00 PM' }
     ]
   },
-  {
+  { 
     id: 'tirupati-balaji',
     name: 'Tirumala Venkateswara Swamy Temple',
     city: 'Tirupati',
@@ -437,6 +437,8 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <HomeLiveDarshanSection />
 
         {/* SECTION: Live Darshan Section (Crucial Core Feature) */}
         <section id="live-darshan" className="py-16 sm:py-24 bg-[#F5EDE1]/50 border-y border-amber-900/10 relative">
