@@ -80,7 +80,7 @@ const TEMPLES_DATA: Temple[] = [
     embedUrl: "https://www.youtube.com/embed/0VfT9g20lMY",
     officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY",
     channelId: "UC4QBKRPvGu_jN8FsOXwGSzQ",
-   fallbackVideoId: "0VfT9g20lMY",  
+    fallbackVideoId: "0VfT9g20lMY",
     aartis: [
       { name: "Kakad Aarti", time: "04:30 AM", completed: true },
       { name: "Panchamrut Snan", time: "06:00 AM", completed: true },
@@ -149,13 +149,13 @@ const TEMPLES_DATA: Temple[] = [
     state: "Maharashtra",
     live: true,
     currentRitual: "Live Samadhi Mandir Darshan",
-    viewers: 24500,
+    viewers: 62800,
     verifiedTrust: "Shri Saibaba Sansthan Trust (Shirdi)",
-    thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkuYsuziY8VvaQ-hpjYMisEedLL5WONQV3Z6WYRZaA3g&s=10",
-    embedUrl: "https://www.youtube.com/embed/FIyZjCazWdI",
-    officialYoutube: "https://www.youtube.com/@ShirdiSaiSansthanLive",
-    channelId: "UC4gP1A3k-91gG3PqI6bVjEQ",
-   fallbackVideoId: "FIyZjCazWdI",
+    thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-ipMhrWS3b4kGIbV3IYINZ11IuETufiX4c5g_FLCuqQ&s=10",
+    embedUrl: "https://www.youtube.com/embed/EMMWSBPvbrE",
+    officialYoutube: "https://www.youtube.com/live/EMMWSBPvbrE",
+    channelId: "UCoj525WIszT7Mnp7seDPsTA",
+    fallbackVideoId: "EMMWSBPvbrE",
     aartis: [
       { name: "Kakad Aarti", time: "04:30 AM", completed: true },
       { name: "Madhyan Aarti", time: "12:00 PM", completed: false, current: true },
@@ -416,11 +416,10 @@ export default function LiveDarshanPage() {
               <button
                 type="button"
                 onClick={() => setViewMode("single")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  viewMode === "single"
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${viewMode === "single"
                     ? "bg-white text-amber-950 shadow-sm font-semibold"
                     : "text-[#6A574A] hover:text-[#2A1214]"
-                }`}
+                  }`}
               >
                 <Square className="w-3.5 h-3.5" />
                 <span>Single</span>
@@ -428,11 +427,10 @@ export default function LiveDarshanPage() {
               <button
                 type="button"
                 onClick={() => setViewMode("split")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  viewMode === "split"
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${viewMode === "split"
                     ? "bg-white text-amber-950 shadow-sm font-semibold"
                     : "text-[#6A574A] hover:text-[#2A1214]"
-                }`}
+                  }`}
               >
                 <Grid2X2 className="w-3.5 h-3.5" />
                 <span>Dual</span>
@@ -530,11 +528,10 @@ export default function LiveDarshanPage() {
                   return (
                     <div
                       key={idx}
-                      className={`p-3 rounded-xl border text-center transition-all flex flex-col justify-between ${
-                        active
+                      className={`p-3 rounded-xl border text-center transition-all flex flex-col justify-between ${active
                           ? "bg-amber-100 border-amber-600 ring-2 ring-amber-500/50 shadow-sm"
                           : "bg-white border-[#EADECC]"
-                      }`}
+                        }`}
                     >
                       <div>
                         <div className="text-xs font-bold text-[#32170D] truncate">
@@ -562,11 +559,10 @@ export default function LiveDarshanPage() {
                             )
                           }
                           title={active ? "Turn Off Alarm" : `Set Alarm for ${aarti.time}`}
-                          className={`p-1.5 rounded-lg transition-all ${
-                            active
+                          className={`p-1.5 rounded-lg transition-all ${active
                               ? "bg-red-600 text-white shadow-sm ring-2 ring-red-400/50"
                               : "text-amber-800 hover:bg-amber-100"
-                          }`}
+                            }`}
                         >
                           <Bell className={`w-3.5 h-3.5 ${active ? "animate-pulse" : ""}`} />
                         </button>
@@ -592,11 +588,10 @@ export default function LiveDarshanPage() {
                     ensureAudioUnlocked();
                     setSelectedTemple(temple);
                   }}
-                  className={`w-full text-left p-3 rounded-xl transition-all flex items-center gap-3 border ${
-                    selectedTemple.id === temple.id
+                  className={`w-full text-left p-3 rounded-xl transition-all flex items-center gap-3 border ${selectedTemple.id === temple.id
                       ? "bg-[#351417] text-white border-amber-700 shadow-md"
                       : "bg-white hover:bg-[#FDF9F3] text-[#2C180E] border-[#EADFCF]"
-                  }`}
+                    }`}
                 >
                   <img
                     src={temple.thumbnail}
