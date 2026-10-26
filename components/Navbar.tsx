@@ -27,7 +27,7 @@ const NAV_LINKS: NavItem[] = [
   { label: "Live Darshan", href: "/live-darshan", icon: Radio, badge: "Live" },
   { label: "Temples", href: "/temples", icon: Landmark },
   { label: "Spiritual Trips", href: "/trips", icon: Compass },
-  { label: "Donations", href: "/donations", icon: HeartHandshake },
+  
 ];
 
 export default function Navbar() {

@@ -62,7 +62,7 @@ export default function Footer() {
                   href="/live-darshan"
                   className="hover:text-amber-300 transition-colors flex items-center gap-1.5"
                 >
-                  <span>Live Sanctums</span>
+                  <span>Live Darshan</span>
                   <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                 </Link>
               </li>
@@ -76,18 +76,14 @@ export default function Footer() {
                   Spiritual Yatras
                 </Link>
               </li>
-              <li>
-                <Link href="/donations" className="hover:text-amber-300 transition-colors">
-                  Direct Trust Donations
-                </Link>
-              </li>
+             
             </ul>
           </div>
 
           {/* Sacred Shrines */}
           <div>
             <h4 className="font-serif text-base font-semibold text-white tracking-wide mb-4">
-              Sacred Shrines
+              Templaes
             </h4>
             <ul className="space-y-2.5 text-sm text-[#C8B4A5]">
               <li>
@@ -134,17 +130,8 @@ export default function Footer() {
                   Aarti & Darshan Timings
                 </Link>
               </li>
-              <li>
-                <Link href="/yatra-guidelines" className="hover:text-amber-300 transition-colors">
-                  Pilgrim Dress Code & Rules
-                </Link>
-              </li>
-              <li>
-                <Link href="/onboard-temple" className="hover:text-amber-300 transition-colors flex items-center gap-1">
-                  <span>Register a Temple Trust</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
-                </Link>
-              </li>
+           
+             
               <li>
                 <Link href="/help" className="hover:text-amber-300 transition-colors">
                   Help & FAQs
