@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Loader2, ExternalLink, RefreshCw } from "lucide-react";
+import {
+  Loader2,
+  ExternalLink,
+  RefreshCw,
+  Volume2,
+  VolumeX,
+  Maximize2,
+} from "lucide-react";
 
 interface LiveStreamPlayerProps {
   channelId?: string;
@@ -12,7 +19,6 @@ interface LiveStreamPlayerProps {
   thumbnail?: string;
 }
 
-// Clean helper to extract valid 11-char YouTube ID
 function cleanVideoId(raw: string): string | null {
   if (!raw) return null;
   const trimmed = raw.trim();
@@ -35,17 +41,46 @@ export default function LiveStreamPlayer({
 }: LiveStreamPlayerProps) {
   const playerRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const [isLoading, setIsLoading] = useState(true);
   const [hasPlaybackError, setHasPlaybackError] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   const validVideoId = cleanVideoId(fallbackVideoId);
   const useChannelIframe = !validVideoId && Boolean(channelId);
+
+  // Toggle Mute / Unmute via your own UI button
+  const toggleAudio = () => {
+    if (!playerRef.current) return;
+    try {
+      if (isMuted) {
+        playerRef.current.unMute();
+        playerRef.current.setVolume(100);
+        setIsMuted(false);
+      } else {
+        playerRef.current.mute();
+        setIsMuted(true);
+      }
+    } catch (e) {
+      console.warn("Audio toggle error:", e);
+    }
+  };
+
+  // App-native fullscreen toggle
+  const toggleFullScreen = () => {
+    if (!containerRef.current) return;
+    if (!document.fullscreenElement) {
+      containerRef.current.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  };
 
   useEffect(() => {
     setIsLoading(true);
     setHasPlaybackError(false);
 
-    // If we are using the channel live_stream URL, standard iframe handles it
     if (useChannelIframe) {
       return;
     }
@@ -56,7 +91,7 @@ export default function LiveStreamPlayer({
       return;
     }
 
-    // Safe script injection
+    // Safe YouTube script injection
     if (typeof window !== "undefined") {
       const win = window as any;
       if (!win.YT) {
@@ -102,9 +137,12 @@ export default function LiveStreamPlayer({
             autoplay: 1,
             mute: 1,
             playsinline: 1,
-            modestbranding: 1,
-            rel: 0,
-            enablejsapi: 1,
+            controls: 0,        // Hides YouTube's bottom bar and title overlay
+            modestbranding: 1,  // Removes large YouTube logo
+            rel: 0,             // Limits related videos to only the same broadcast
+            disablekb: 1,       // Disables YouTube keyboard shortcuts
+            fs: 0,              // Hides YouTube native fullscreen button (use our custom one)
+            iv_load_policy: 3,  // Hides video annotations and channel promo cards
             origin: typeof window !== "undefined" ? window.location.origin : "",
           },
           events: {
@@ -186,30 +224,77 @@ export default function LiveStreamPlayer({
     );
   }
 
-  // If no direct videoId, fallback cleanly to native channel iframe
-  if (useChannelIframe) {
-    return (
-      <div className="relative w-full h-full bg-black">
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full h-full bg-black overflow-hidden select-none group"
+    >
+      {/* 1. Video Mount Node */}
+      {useChannelIframe ? (
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1`}
+          src={`https://www.youtube-nocookie.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3`}
           title={title}
-          className="w-full h-full border-0"
+          className="w-full h-full border-0 pointer-events-none"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
-      </div>
-    );
-  }
+      ) : (
+        <div ref={wrapperRef} className="w-full h-full pointer-events-none" />
+      )}
 
-  return (
-    <div className="relative w-full h-full bg-black flex items-center justify-center">
+      {/* 2. Top Header Shield: Blocks clicks on channel name / avatar / share */}
+      <div className="absolute top-0 left-0 right-0 h-16 z-20 pointer-events-auto bg-gradient-to-b from-black/60 to-transparent" />
+
+      {/* 3. Bottom Shield: Blocks YouTube watermarks/links at the bottom-right */}
+      <div className="absolute bottom-0 left-0 right-0 h-14 z-20 pointer-events-auto bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between px-4">
+        
+        {/* Live Indicator */}
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
+          <span className="text-[11px] font-bold text-white tracking-wider uppercase drop-shadow">
+            LIVE GARBHAGRIHA
+          </span>
+        </div>
+
+        {/* Clean, App-Native Controls (No YouTube branding) */}
+        <div className="flex items-center gap-2 pointer-events-auto">
+          <button
+            type="button"
+            onClick={toggleAudio}
+            className="p-1.5 rounded-lg bg-black/60 hover:bg-black/90 border border-white/20 text-white transition-all shadow-md active:scale-95 flex items-center gap-1.5 px-2.5"
+            title={isMuted ? "Unmute Live Audio" : "Mute Live Audio"}
+          >
+            {isMuted ? (
+              <>
+                <VolumeX className="w-3.5 h-3.5 text-amber-400" />
+                <span className="text-[11px] font-semibold">Unmute</span>
+              </>
+            ) : (
+              <>
+                <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-[11px] font-semibold">Sound On</span>
+              </>
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleFullScreen}
+            className="p-1.5 rounded-lg bg-black/60 hover:bg-black/90 border border-white/20 text-white transition-all shadow-md active:scale-95"
+            title="Full Screen Darshan"
+          >
+            <Maximize2 className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* 4. Loading Overlay */}
       {isLoading && (
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/85 text-white gap-2">
+        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/90 text-white gap-2">
           <Loader2 className="w-8 h-8 text-amber-500 animate-spin" />
-          <span className="text-xs text-stone-300">Connecting to Sanctum...</span>
+          <span className="text-xs text-stone-300">Syncing with Live Garbhagriha...</span>
         </div>
       )}
-      <div ref={wrapperRef} className="w-full h-full" />
     </div>
   );
 }
