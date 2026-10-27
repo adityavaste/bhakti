@@ -158,8 +158,8 @@ const TEMPLES_DATA = [
     nextAarti: 'Dhoop Aarti (Sunset)',
     currentDarshan: 'Samadhi Mandir Darshan',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlDhJDDA5usMIXTkVdietvZ1E1fhXtsC9Z4MOriWrTaA&s=10',
-    embedVideoId: "FIyZjCazWdI",
-    officialChannelUrl: 'https://www.youtube.com/live/n40cgPVVViE?si=DjL6bAiolj3Ip7aM',
+   embedVideoId: "n40cgPVVViE",
+officialYoutube: "https://www.youtube.com/live/n40cgPVVViE?si=88dbWkriA1_XH8U2",
     channelId: "UC4gP1A3k-91gG3PqI6bVjEQ",
     description: 'The holy abode and samadhi of Sadguru Sai Baba, welcoming millions of all faiths.',
     timings: [
