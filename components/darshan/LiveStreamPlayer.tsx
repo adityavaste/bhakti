@@ -28,8 +28,9 @@ export default function LiveStreamPlayer({
   const [isLoading, setIsLoading] = useState(true);
   const [hasPlaybackError, setHasPlaybackError] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [useRawChannelEmbed, setUseRawChannelEmbed] = useState(false);
 
-  // 1. Dynamically sync with today's live video ID
+  // Sync active live stream ID from route, but don't hang if Vercel blocks it
   useEffect(() => {
     let isCancelled = false;
 
@@ -40,13 +41,27 @@ export default function LiveStreamPlayer({
       }
 
       try {
-        const res = await fetch(`/api/temple-live?handle=${channelId}&templeId=${templeId}`);
-        const data = await res.json();
-        if (!isCancelled && data.videoId) {
-          setActiveVideoId(data.videoId);
+        const res = await fetch(`/api/temple-live?handle=${channelId}&templeId=${templeId}`, {
+          cache: "no-store",
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (!isCancelled && data.videoId) {
+            setActiveVideoId(data.videoId);
+            return;
+          }
         }
-      } catch {
-        if (!isCancelled) setActiveVideoId(fallbackVideoId);
+      } catch (err) {
+        console.warn("API route probe failed on Vercel, using fallback/channel embed:", err);
+      }
+
+      // If resolving failed on Vercel, use direct channel embed
+      if (!isCancelled) {
+        if (channelId) {
+          setUseRawChannelEmbed(true);
+        } else {
+          setActiveVideoId(fallbackVideoId);
+        }
       }
     }
 
@@ -57,9 +72,9 @@ export default function LiveStreamPlayer({
     };
   }, [channelId, fallbackVideoId, templeId]);
 
-  // 2. Initialize YouTube Player on the verified active ID
+  // Mount YouTube Iframe API when activeVideoId is valid
   useEffect(() => {
-    if (!activeVideoId) return;
+    if (useRawChannelEmbed || !activeVideoId) return;
 
     setIsLoading(true);
     setHasPlaybackError(false);
@@ -111,7 +126,7 @@ export default function LiveStreamPlayer({
             modestbranding: 1,
             rel: 0,
             disablekb: 1,
-            origin: typeof window !== "undefined" ? window.location.origin : "",
+            enablejsapi: 1,
           },
           events: {
             onReady: (event: any) => {
@@ -119,7 +134,6 @@ export default function LiveStreamPlayer({
               setIsLoading(false);
               const p = event.target;
               p.playVideo();
-              // FORCE JUMP TO REAL-TIME SECONDS:
               try {
                 const dur = p.getDuration();
                 if (dur > 0) p.seekTo(dur, true);
@@ -127,20 +141,30 @@ export default function LiveStreamPlayer({
             },
             onError: (event: any) => {
               if (!isSubscribed) return;
-              console.warn("Stream error on ID:", activeVideoId, event.data);
-              setHasPlaybackError(true);
-              setIsLoading(false);
+              console.warn("IFrame API failed on Vercel with code:", event.data);
+              // Fallback directly to native channel live embed
+              if (channelId) {
+                setUseRawChannelEmbed(true);
+                setIsLoading(false);
+              } else {
+                setHasPlaybackError(true);
+                setIsLoading(false);
+              }
             },
           },
         });
-      } catch (err) {
-        setHasPlaybackError(true);
+      } catch {
+        if (channelId) {
+          setUseRawChannelEmbed(true);
+        } else {
+          setHasPlaybackError(true);
+        }
         setIsLoading(false);
       }
     };
 
     const win = typeof window !== "undefined" ? (window as any) : null;
-    if (win?.YT?.Player) {
+    if (win?.YT && win?.YT?.Player) {
       init();
     } else if (win) {
       win.onYouTubeIframeAPIReady = init;
@@ -155,7 +179,7 @@ export default function LiveStreamPlayer({
         playerRef.current = null;
       }
     };
-  }, [activeVideoId]);
+  }, [activeVideoId, useRawChannelEmbed, channelId]);
 
   const toggleAudio = () => {
     if (!playerRef.current) return;
@@ -217,9 +241,21 @@ export default function LiveStreamPlayer({
 
   return (
     <div ref={containerRef} className="relative w-full h-full bg-black overflow-hidden select-none">
-      <div ref={wrapperRef} className="w-full h-full pointer-events-none" />
+      {/* Either mount via YouTube Iframe API, or native Channel Live Stream URL */}
+      {useRawChannelEmbed && channelId ? (
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3`}
+          title={title}
+          className="w-full h-full border-0 pointer-events-none"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          onLoad={() => setIsLoading(false)}
+        />
+      ) : (
+        <div ref={wrapperRef} className="w-full h-full pointer-events-none" />
+      )}
 
-      {/* Top shield (blocks clicking YouTube channel avatar/links) */}
+      {/* Top shield (blocks clicking channel name / avatar) */}
       <div className="absolute top-0 left-0 right-0 h-16 z-20 pointer-events-auto bg-gradient-to-b from-black/60 to-transparent" />
 
       {/* Bottom control bar */}
@@ -232,23 +268,25 @@ export default function LiveStreamPlayer({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={toggleAudio}
-            className="p-1.5 rounded-lg bg-black/60 hover:bg-black/90 border border-white/20 text-white transition-all shadow-md active:scale-95 flex items-center gap-1.5 px-2.5"
-          >
-            {isMuted ? (
-              <>
-                <VolumeX className="w-3.5 h-3.5 text-amber-400" />
-                <span className="text-[11px] font-semibold">Unmute</span>
-              </>
-            ) : (
-              <>
-                <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-[11px] font-semibold">Sound On</span>
-              </>
-            )}
-          </button>
+          {!useRawChannelEmbed && (
+            <button
+              type="button"
+              onClick={toggleAudio}
+              className="p-1.5 rounded-lg bg-black/60 hover:bg-black/90 border border-white/20 text-white transition-all shadow-md active:scale-95 flex items-center gap-1.5 px-2.5"
+            >
+              {isMuted ? (
+                <>
+                  <VolumeX className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="text-[11px] font-semibold">Unmute</span>
+                </>
+              ) : (
+                <>
+                  <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-[11px] font-semibold">Sound On</span>
+                </>
+              )}
+            </button>
+          )}
 
           <button
             type="button"
