@@ -1,9 +1,6 @@
 // app/api/temple-live/route.ts
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const handleOrChannel = searchParams.get("handle");
@@ -36,7 +33,7 @@ export async function GET(req: Request) {
       return NextResponse.json({ videoId: canonicalMatch[1], isLive: true });
     }
   } catch (err) {
-    console.error("Vercel probe error:", err);
+    console.error("Probe error:", err);
   }
 
   return NextResponse.json({ videoId: null, isLive: false });
