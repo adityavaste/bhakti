@@ -77,7 +77,7 @@ const TEMPLES_DATA: Temple[] = [
     viewers: 28420,
     verifiedTrust: "Shree Vitthal Rukmini Mandir Samiti",
     thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgPRe_AbXY_qOx7le34fmCagoX5K436IYKzJBvIiKqUw&s=10",
-    embedUrl: "https://www.youtube.com/embed/0VfT9g20lMY",
+    embedUrl: "https://www.youtube.com/embed/d0T2EtIUB3E",
     officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY",
     channelId: "UC4QBKRPvGu_jN8FsOXwGSzQ",
     fallbackVideoId: "0VfT9g20lMY",
