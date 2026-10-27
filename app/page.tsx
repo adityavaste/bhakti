@@ -45,8 +45,8 @@ const TEMPLES_DATA = [
     nextAarti: 'Kakad Aarti (04:30 AM)',
     currentDarshan: 'Nitya Pooja & Mukh Darshan',
     image: 'https://photos.mytemplemypride.com/ef0566c4-03b9-4186-aeb8-1b55e119a952/89c9c005-649a-4238-8b30-9897a5ea0928.png',
-    embedVideoId: "0VfT9g20lMY",
-    officialYoutube: "https://www.youtube.com/live/d0T2EtIUB3E?si=FxpwCj3GFm3vlOEJ",
+    embedVideoId: "d0T2EtIUB3E",
+    officialYoutube: "https://www.youtube.com/live/d0T2EtIUB3E",
     channelId: "UC4QBKRPvGu_jN8FsOXwGSzQ",
     description: 'The supreme abode of Lord Vitthal (Vithoba) and Mother Rukmini on the banks of Chandrabhaga river.',
     timings: [
@@ -56,7 +56,7 @@ const TEMPLES_DATA = [
       { name: 'Shej Aarti', time: '11:00 PM' }
     ]
   },
-  { 
+  {
     id: 'tirupati-balaji',
     name: 'Tirumala Venkateswara Swamy Temple',
     city: 'Tirupati',
@@ -463,8 +463,8 @@ export default function App() {
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
                     className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${activeCategory === cat
-                        ? 'bg-amber-800 text-white shadow-sm'
-                        : 'bg-white/80 text-stone-700 hover:bg-white border border-stone-200'
+                      ? 'bg-amber-800 text-white shadow-sm'
+                      : 'bg-white/80 text-stone-700 hover:bg-white border border-stone-200'
                       }`}
                   >
                     {cat === 'All' ? 'All Temples' : cat}
