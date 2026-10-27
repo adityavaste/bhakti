@@ -152,7 +152,7 @@ const TEMPLES_DATA: Temple[] = [
     viewers: 62800,
     verifiedTrust: "Shri Saibaba Sansthan Trust (Shirdi)",
     thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-ipMhrWS3b4kGIbV3IYINZ11IuETufiX4c5g_FLCuqQ&s=10",
-    embedUrl: "https://www.youtube.com/embed/EMMWSBPvbrE",
+    embedUrl: "https://www.youtube.com/live/n40cgPVVViE?si=DjL6bAiolj3Ip7aM",
     officialYoutube: "https://www.youtube.com/live/EMMWSBPvbrE",
     channelId: "UCoj525WIszT7Mnp7seDPsTA",
     fallbackVideoId: "EMMWSBPvbrE",

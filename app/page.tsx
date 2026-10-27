@@ -46,7 +46,7 @@ const TEMPLES_DATA = [
     currentDarshan: 'Nitya Pooja & Mukh Darshan',
     image: 'https://photos.mytemplemypride.com/ef0566c4-03b9-4186-aeb8-1b55e119a952/89c9c005-649a-4238-8b30-9897a5ea0928.png',
     embedVideoId: "0VfT9g20lMY",
-    officialYoutube: "https://www.youtube.com/live/0VfT9g20lMY?si=k5iFO96lhsKrmZ7q",
+    officialYoutube: "https://www.youtube.com/live/d0T2EtIUB3E?si=FxpwCj3GFm3vlOEJ",
     channelId: "UC4QBKRPvGu_jN8FsOXwGSzQ",
     description: 'The supreme abode of Lord Vitthal (Vithoba) and Mother Rukmini on the banks of Chandrabhaga river.',
     timings: [
@@ -159,7 +159,7 @@ const TEMPLES_DATA = [
     currentDarshan: 'Samadhi Mandir Darshan',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlDhJDDA5usMIXTkVdietvZ1E1fhXtsC9Z4MOriWrTaA&s=10',
     embedVideoId: "FIyZjCazWdI",
-    officialChannelUrl: 'https://www.youtube.com/@ShirdiSaiSansthanLive',
+    officialChannelUrl: 'https://www.youtube.com/live/n40cgPVVViE?si=DjL6bAiolj3Ip7aM',
     channelId: "UC4gP1A3k-91gG3PqI6bVjEQ",
     description: 'The holy abode and samadhi of Sadguru Sai Baba, welcoming millions of all faiths.',
     timings: [
