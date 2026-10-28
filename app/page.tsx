@@ -1,5 +1,6 @@
 "use client";
 import Link from 'next/link';
+import DigitalJapaMala from "@/components/darshan/DigitalJapaMala";
 
 import Navbar from '@/components/Navbar';
 import LiveStreamPlayer from '@/components/darshan/LiveStreamPlayer';
@@ -1074,6 +1075,25 @@ export default function App() {
             </div>
           </div>
         )}
+
+        <section className="py-16 bg-[#FDFBF7]">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center max-w-xl mx-auto mb-10">
+      <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
+        Sacred Daily Sadhana
+      </span>
+      <h2 className="text-3xl font-serif font-bold text-[#381014] mt-1">
+        Digital Japa Mala Counter
+      </h2>
+      <p className="text-stone-600 text-sm mt-1">
+        Turn your phone into a Tulsi Mala. Complete your daily 108 chants with haptic bead feedback and chime resonance.
+      </p>
+    </div>
+
+    {/* Japa Mala Widget */}
+    <DigitalJapaMala />
+  </div>
+</section>
 
       </div>
     </>
