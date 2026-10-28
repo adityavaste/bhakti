@@ -25,7 +25,7 @@ const BEADS_PER_MALA = 108;
 
 export default function DigitalJapaMala() {
   const [selectedMantra, setSelectedMantra] = useState(MANTRAS[0]);
-  const [currentCount, setCurrentCount] = useState(0); // 0 to 108
+  const [currentCount, setCurrentCount] = useState(0);
   const [completedMalas, setCompletedMalas] = useState(0);
   const [totalLifetimeChants, setTotalLifetimeChants] = useState(0);
   const [isAudioEnabled, setIsAudioEnabled] = useState(true);
@@ -33,57 +33,95 @@ export default function DigitalJapaMala() {
   const [isVolumeKeyMode, setIsVolumeKeyMode] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
 
+  // Audio Context Ref
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const isAudioUnlockedRef = useRef<boolean>(false);
 
-  // Initialize AudioContext on user interaction
-  const unlockAudio = () => {
+  // Reliable sync audio primer for iOS & Android
+  const ensureAudioUnlocked = () => {
     try {
+      if (typeof window === "undefined") return;
+
       if (!audioCtxRef.current || audioCtxRef.current.state === "closed") {
-        const AudioClass =
+        const AudioConstructor =
           window.AudioContext ||
           (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-        if (AudioClass) audioCtxRef.current = new AudioClass();
+        if (AudioConstructor) {
+          audioCtxRef.current = new AudioConstructor();
+        }
       }
-      if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
-        audioCtxRef.current.resume();
+
+      const ctx = audioCtxRef.current;
+      if (ctx && ctx.state === "suspended") {
+        ctx.resume();
+      }
+
+      // Play 1-sample silent buffer once to permanently unlock mobile audio pipeline
+      if (ctx && !isAudioUnlockedRef.current) {
+        const buffer = ctx.createBuffer(1, 1, 22050);
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(ctx.destination);
+        source.start(0);
+        isAudioUnlockedRef.current = true;
       }
     } catch (e) {
-      console.warn("Audio unlock failed", e);
+      console.warn("Audio unlock error:", e);
     }
   };
 
-  // Play subtle wooden bead resonance tone
+  // Acoustic Bead Sound (Synthesized wood click + metallic bell)
   const playBeadClickSound = useCallback((isMilestone = false) => {
     if (!isAudioEnabled) return;
     try {
-      unlockAudio();
       const ctx = audioCtxRef.current;
-      if (!ctx || ctx.state === "closed") return;
-
-      const now = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      if (isMilestone) {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(587.33, now); // D5 sacred bell chime
-        gain.gain.setValueAtTime(0.35, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
-        osc.start(now);
-        osc.stop(now + 1.2);
-      } else {
-        osc.type = "triangle";
-        osc.frequency.setValueAtTime(220, now);
-        osc.frequency.exponentialRampToValueAtTime(110, now + 0.05);
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
-        osc.start(now);
-        osc.stop(now + 0.06);
+      if (!ctx || ctx.state !== "running") {
+        ensureAudioUnlocked();
       }
 
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-    } catch {}
+      const activeCtx = audioCtxRef.current;
+      if (!activeCtx || activeCtx.state === "closed") return;
+
+      const now = activeCtx.currentTime;
+
+      if (isMilestone) {
+        // Clear Sacred Tibetan Singing Bowl / Ghanta chime for bead 108
+        const osc = activeCtx.createOscillator();
+        const gain = activeCtx.createGain();
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(587.33, now); // D5 chime
+        osc.frequency.exponentialRampToValueAtTime(293.66, now + 1.2);
+
+        gain.gain.setValueAtTime(0.4, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
+
+        osc.connect(gain);
+        gain.connect(activeCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + 1.5);
+      } else {
+        // High-definition wooden tulsi bead clack
+        const osc = activeCtx.createOscillator();
+        const gain = activeCtx.createGain();
+
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(90, now + 0.05);
+
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
+        osc.connect(gain);
+        gain.connect(activeCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.05);
+      }
+    } catch (err) {
+      console.warn("Sound generation failed:", err);
+    }
   }, [isAudioEnabled]);
 
   // Load stats from localStorage
@@ -100,39 +138,43 @@ export default function DigitalJapaMala() {
 
   // Main Chanting Action
   const handleChantTap = useCallback(() => {
-    unlockAudio();
+    // 1. Synchronous unlock in direct user tap handler
+    ensureAudioUnlocked();
 
     setCurrentCount((prevCount) => {
       const nextCount = prevCount + 1;
       const isCompleted = nextCount === BEADS_PER_MALA;
 
-      // Haptic feedback
+      // Haptics
       if (isHapticsEnabled && typeof window !== "undefined" && "vibrate" in navigator) {
-        if (isCompleted) {
-          navigator.vibrate([150, 100, 250]);
-        } else {
-          navigator.vibrate(35);
-        }
+        try {
+          if (isCompleted) {
+            navigator.vibrate([150, 100, 250]);
+          } else {
+            navigator.vibrate(35);
+          }
+        } catch {}
       }
 
-      // Audio feedback
+      // Audio
       playBeadClickSound(isCompleted);
 
-      setTotalLifetimeChants((prevLifetime) => {
-        const updatedTotal = prevLifetime + 1;
+      // Save Lifetime
+      setTotalLifetimeChants((prev) => {
+        const updated = prev + 1;
         try {
-          localStorage.setItem("japa_lifetime_chants", String(updatedTotal));
+          localStorage.setItem("japa_lifetime_chants", String(updated));
         } catch {}
-        return updatedTotal;
+        return updated;
       });
 
       if (isCompleted) {
-        setCompletedMalas((prevMalas) => {
-          const updatedMalas = prevMalas + 1;
+        setCompletedMalas((prev) => {
+          const updated = prev + 1;
           try {
-            localStorage.setItem("japa_completed_malas", String(updatedMalas));
+            localStorage.setItem("japa_completed_malas", String(updated));
           } catch {}
-          return updatedMalas;
+          return updated;
         });
 
         setShowCelebration(true);
@@ -144,12 +186,11 @@ export default function DigitalJapaMala() {
     });
   }, [isHapticsEnabled, playBeadClickSound]);
 
-  // Hardware Volume & Key Listener
+  // Volume Key Listener
   useEffect(() => {
     if (!isVolumeKeyMode) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Intercept volume keys and standard desktop trigger keys
       if (
         e.key === "AudioVolumeUp" ||
         e.key === "AudioVolumeDown" ||
@@ -171,11 +212,17 @@ export default function DigitalJapaMala() {
   }, [isVolumeKeyMode, handleChantTap]);
 
   const toggleVolumeKeyMode = () => {
+    ensureAudioUnlocked();
     const nextVal = !isVolumeKeyMode;
     setIsVolumeKeyMode(nextVal);
     try {
       localStorage.setItem("japa_vol_key_mode", String(nextVal));
     } catch {}
+  };
+
+  const toggleAudio = () => {
+    ensureAudioUnlocked();
+    setIsAudioEnabled((prev) => !prev);
   };
 
   const resetCurrentMala = (e: React.MouseEvent) => {
@@ -208,7 +255,7 @@ export default function DigitalJapaMala() {
           </div>
 
           <div className="flex items-center gap-1.5">
-            {/* Volume Key Chanting Toggle */}
+            {/* Volume Key Toggle */}
             <button
               type="button"
               onClick={toggleVolumeKeyMode}
@@ -217,11 +264,7 @@ export default function DigitalJapaMala() {
                   ? "bg-amber-600 text-white border-amber-400 shadow-md ring-1 ring-amber-400"
                   : "bg-white/5 border-white/10 text-stone-400 hover:text-white"
               }`}
-              title={
-                isVolumeKeyMode
-                  ? "Hardware Volume Key Chanting: Enabled"
-                  : "Click to enable Volume Button Chanting"
-              }
+              title="Toggle Hardware Volume Keys"
             >
               <Smartphone className="w-4 h-4" />
               <span className="text-[10px] font-bold">Vol Keys</span>
@@ -230,7 +273,7 @@ export default function DigitalJapaMala() {
             {/* Sound Toggle */}
             <button
               type="button"
-              onClick={() => setIsAudioEnabled(!isAudioEnabled)}
+              onClick={toggleAudio}
               className={`p-2 rounded-xl border transition-all ${
                 isAudioEnabled
                   ? "bg-amber-500/20 border-amber-500/40 text-amber-300"
@@ -254,21 +297,21 @@ export default function DigitalJapaMala() {
                   ? "bg-amber-500/20 border-amber-500/40 text-amber-300"
                   : "bg-white/5 border-white/10 text-stone-400"
               }`}
-              title={isHapticsEnabled ? "Haptic Vibration Active" : "Vibration Disabled"}
+              title="Toggle Haptic Vibration"
             >
               <Vibrate className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Volume Key Mode Active Notification Banner */}
+        {/* Volume Mode Banner */}
         {isVolumeKeyMode && (
           <div className="p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-[11px] flex items-center justify-between">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Volume buttons actively count beads!
+              Hardware volume keys active
             </span>
-            <span className="text-[10px] text-amber-300/80 font-mono">Vol +/-</span>
+            <span className="text-[10px] text-amber-300/80 font-mono">Vol Up / Down</span>
           </div>
         )}
 
@@ -297,7 +340,7 @@ export default function DigitalJapaMala() {
         </div>
       </div>
 
-      {/* Main Touch / Visual Wheel */}
+      {/* Main Touch Wheel */}
       <div
         onClick={handleChantTap}
         className="my-8 relative cursor-pointer group flex flex-col items-center justify-center"
@@ -338,7 +381,7 @@ export default function DigitalJapaMala() {
             <span className="text-[10px] text-amber-300/60 mt-2 text-center px-4">
               {isVolumeKeyMode
                 ? "Press Phone Volume Key or Tap"
-                : "Tap anywhere on wheel to chant"}
+                : "Tap anywhere to chant"}
             </span>
           </div>
         </div>
