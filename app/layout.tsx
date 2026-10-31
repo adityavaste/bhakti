@@ -1,4 +1,7 @@
 // app/layout.tsx
+import "./globals.css";
+import { AudioPlayerProvider } from "@/context/AudioPlayerContext";
+import RadioPlayerDock from "@/components/darshan/RadioPlayerDock";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
@@ -56,6 +59,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col bg-[#FDFBF7] text-[#2D1609] antialiased`}
       >
+        <AudioPlayerProvider>
         <ServiceWorkerRegister />
         <TopBar />
         <Navbar />
@@ -64,6 +68,8 @@ export default function RootLayout({
 
         {/* Floating PWA Install Banner */}
         <InstallPrompt />
+        <RadioPlayerDock />
+        </AudioPlayerProvider>
       </body>
     </html>
   );
