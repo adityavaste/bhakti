@@ -22,6 +22,33 @@ export interface RadioStation {
 
 // 1. Clean, verified streams that work across all mobile & desktop browsers
 export const STATIONS: RadioStation[] = [
+   {
+    id: "gayatri-mantra",
+    name: "Akhand Gayatri Mantra",
+    category: "Vedic Chants",
+    streamUrl: "/audio/gayatri-mantra.mp3",
+    deity: "Mother Gayatri",
+    artwork: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=400&auto=format&fit=crop",
+    description: "Sacred recitation of the Gayatri Mahamantra.",
+  },
+   {
+    id: "Krishna",
+    name: "Krishna",
+    category: "Vedic Chants",
+    streamUrl: "/audio/krishna.mp3",
+    deity: "Mother Gayatri",
+    artwork: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=400&auto=format&fit=crop",
+    description: "Sacred recitation of the Gayatri Mahamantra.",
+  },
+   {
+    id: "hare-Krishna",
+    name: "Hare-Krishna",
+    category: "Vedic Chants",
+    streamUrl: "/audio/hare-krishna.mp3",
+    deity: "Mother Gayatri",
+    artwork: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=400&auto=format&fit=crop",
+    description: "Sacred recitation of the Gayatri Mahamantra.",
+  },
   {
     id: "sanctum-flute",
     name: "Sanctum Bansuri & Tanpura",
@@ -40,15 +67,7 @@ export const STATIONS: RadioStation[] = [
     artwork: "https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=400&auto=format&fit=crop",
     description: "Continuous peaceful Om vibrations to quiet the mind.",
   },
-  {
-    id: "gayatri-mantra",
-    name: "Akhand Gayatri Mantra",
-    category: "Vedic Chants",
-    streamUrl: "/audio/gayatri-mantra.mp3",
-    deity: "Mother Gayatri",
-    artwork: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=400&auto=format&fit=crop",
-    description: "Sacred recitation of the Gayatri Mahamantra.",
-  },
+ 
 ];
 
 interface AudioContextType {
