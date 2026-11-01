@@ -7,9 +7,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
-import InstallPrompt from "@/components/InstallPrompt"; // <-- Import prompt banner
+
 import TopBar from "@/components/Top-bar";
 import "./globals.css";
+import InstallAppBanner from "@/components/InstallAppBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,7 +68,8 @@ export default function RootLayout({
         <Footer />
 
         {/* Floating PWA Install Banner */}
-        <InstallPrompt />
+       
+        <InstallAppBanner />
         <RadioPlayerDock />
         </AudioPlayerProvider>
       </body>
