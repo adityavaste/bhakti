@@ -191,7 +191,7 @@ const FEATURED_CHANTS = [
     deity: "Lord Shiva",
     artist: "108 Times Chanting",
     duration: "43:50",
-    thumbnail: "https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=600&auto=format&fit=crop",
+    thumbnail: "/Maha Mrityunjaya Mantra.jpeg",
     badge: "Moksha & Healing",
     tagline: "Ancient Rigvedic protection & longevity"
   },
@@ -201,7 +201,7 @@ const FEATURED_CHANTS = [
     deity: "Mother Gayatri",
     artist: "Anuradha Paudwal",
     duration: "25:18",
-    thumbnail: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=600&auto=format&fit=crop",
+    thumbnail: "/Akhand Gayatri Mantra.jpeg",
     badge: "Vedic Wisdom",
     tagline: "Illuminates spiritual intellect & peace"
   }
@@ -667,7 +667,7 @@ export default function App() {
                   Divine Recitations & Stotrams
                 </div>
                 <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#381014]">
-                  Sacred Mantras & Chalisas
+                   Mantras & Chalisas
                 </h2>
                 <p className="text-stone-600 text-sm sm:text-base mt-2 max-w-xl">
                   Revered verses of power and devotion. Listen with lyrics, in-app seeking, and background continuous playback.
@@ -740,7 +740,7 @@ export default function App() {
                       className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#2A1114] to-[#3B171C] hover:from-[#3D181D] hover:to-[#4D1E24] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
                     >
                       <Play className="w-3.5 h-3.5 fill-current text-amber-400" />
-                      <span>Watch & Recite</span>
+                      <span>Watch</span>
                     </Link>
                   </div>
                 </div>
