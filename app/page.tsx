@@ -29,7 +29,8 @@ import {
   Users,
   CheckCircle2,
   ArrowRight,
-  Sun
+  Sun,
+  Music2
 } from 'lucide-react';
 
 // --- MOCK DATA: Temples & Live Streams ---
@@ -159,8 +160,8 @@ const TEMPLES_DATA = [
     nextAarti: 'Dhoop Aarti (Sunset)',
     currentDarshan: 'Samadhi Mandir Darshan',
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlDhJDDA5usMIXTkVdietvZ1E1fhXtsC9Z4MOriWrTaA&s=10',
-   embedVideoId: "n40cgPVVViE",
-officialYoutube: "https://www.youtube.com/live/n40cgPVVViE?si=88dbWkriA1_XH8U2",
+    embedVideoId: "n40cgPVVViE",
+    officialYoutube: "https://www.youtube.com/live/n40cgPVVViE?si=88dbWkriA1_XH8U2",
     channelId: "UC4gP1A3k-91gG3PqI6bVjEQ",
     description: 'The holy abode and samadhi of Sadguru Sai Baba, welcoming millions of all faiths.',
     timings: [
@@ -169,6 +170,40 @@ officialYoutube: "https://www.youtube.com/live/n40cgPVVViE?si=88dbWkriA1_XH8U2",
       { name: 'Dhoop Aarti', time: 'Sunset' },
       { name: 'Shej Aarti', time: '10:30 PM' }
     ]
+  }
+];
+
+// --- FEATURED CHANTS PREVIEW FOR HOMEPAGE ---
+const FEATURED_CHANTS = [
+  {
+    id: "hanuman-chalisa",
+    title: "Shree Hanuman Chalisa",
+    deity: "Lord Hanuman",
+    artist: "Hariharan • Gulshan Kumar",
+    duration: "9:42",
+    thumbnail: "/hanumanchalisa.jpeg",
+    badge: "Most Recited",
+    tagline: "Dispels fear & bestows inner courage"
+  },
+  {
+    id: "maha-mrityunjaya",
+    title: "Maha Mrityunjaya Mantra",
+    deity: "Lord Shiva",
+    artist: "108 Times Chanting",
+    duration: "43:50",
+    thumbnail: "https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=600&auto=format&fit=crop",
+    badge: "Moksha & Healing",
+    tagline: "Ancient Rigvedic protection & longevity"
+  },
+  {
+    id: "gayatri-mantra",
+    title: "Akhand Gayatri Mantra",
+    deity: "Mother Gayatri",
+    artist: "Anuradha Paudwal",
+    duration: "25:18",
+    thumbnail: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=600&auto=format&fit=crop",
+    badge: "Vedic Wisdom",
+    tagline: "Illuminates spiritual intellect & peace"
   }
 ];
 
@@ -283,7 +318,6 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedStateFilter, setSelectedStateFilter] = useState('All');
 
-  // Filter temples based on category and search query
   const filteredTemples = useMemo(() => {
     return TEMPLES_DATA.filter(temple => {
       const matchesSearch =
@@ -314,11 +348,10 @@ export default function App() {
 
   return (
     <>
-      <div className="min-h-screen bg-[#FDFBF7] text-[#2D241E] font-sans antialiased selection:bg-amber-100 selection:text-amber-900">
+      <div className="min-h-screen bg-[#FDFBF7] text-[#2D241E] font-sans antialiased selection:bg-amber-100 selection:text-amber-900 pb-28">
 
         {/* Hero Section */}
         <section id="hero" className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
-          {/* Subtle Decorative Background Mandala Circles */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-amber-200/30 to-rose-200/20 rounded-full blur-3xl pointer-events-none -z-10" />
           <div className="absolute -top-10 -right-10 w-72 h-72 bg-amber-100/60 rounded-full blur-2xl pointer-events-none -z-10" />
 
@@ -354,10 +387,11 @@ export default function App() {
                   </Link>
 
                   <Link
-                    href="/temples"
+                    href="/chants"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-stone-800 bg-white/80 hover:bg-white border border-stone-300/80 hover:border-amber-600/50 shadow-sm transition-all"
                   >
-                    <span>Explore Temples</span>
+                    <Music2 className="w-4 h-4 text-amber-700" />
+                    <span>Sacred Chants</span>
                   </Link>
                 </div>
               </div>
@@ -438,11 +472,10 @@ export default function App() {
           </div>
         </section>
 
-        {/* SECTION: Live Darshan Section (Crucial Core Feature) */}
+        {/* SECTION: Live Darshan Section */}
         <section id="live-darshan" className="py-16 sm:py-24 bg-[#F5EDE1]/50 border-y border-amber-900/10 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            {/* Section Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
               <div>
                 <div className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 uppercase tracking-widest mb-1.5">
@@ -457,7 +490,6 @@ export default function App() {
                 </p>
               </div>
 
-              {/* Category / Tradition Filter Tabs */}
               <div className="flex items-center flex-wrap gap-2">
                 {['All', 'Vaishnav', 'Jyotirlinga', 'Ganesha'].map(cat => (
                   <button
@@ -525,7 +557,6 @@ export default function App() {
                     key={temple.id}
                     className="bg-white rounded-3xl overflow-hidden border border-amber-900/10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
                   >
-                    {/* Card Media Header */}
                     <div className="relative h-52 w-full overflow-hidden bg-stone-100">
                       <img
                         src={temple.image}
@@ -534,7 +565,6 @@ export default function App() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-                      {/* Live Indicator */}
                       <div className="absolute top-3.5 left-3.5">
                         {temple.isLive ? (
                           <span className="inline-flex items-center gap-1.5 bg-rose-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md uppercase tracking-wider">
@@ -549,14 +579,12 @@ export default function App() {
                         )}
                       </div>
 
-                      {/* Viewers or Next Aarti */}
                       <div className="absolute top-3.5 right-3.5">
                         <span className="inline-flex items-center gap-1 bg-black/40 backdrop-blur-md text-amber-200 text-[11px] font-medium px-2.5 py-1 rounded-full border border-white/10">
                           {temple.isLive ? `${temple.viewersCount} watching` : 'Upcoming Stream'}
                         </span>
                       </div>
 
-                      {/* State & City overlay */}
                       <div className="absolute bottom-3 left-4 right-4 text-white">
                         <p className="text-xs font-medium text-amber-300 flex items-center gap-1">
                           <MapPin className="w-3 h-3" />
@@ -568,13 +596,11 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* Card Body */}
                     <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                       <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed">
                         {temple.description}
                       </p>
 
-                      {/* Ritual Status */}
                       <div className="bg-amber-50/70 rounded-xl p-3 border border-amber-100 space-y-1.5 text-xs">
                         <div className="flex items-center justify-between text-stone-600">
                           <span className="font-medium">Current Status:</span>
@@ -586,7 +612,6 @@ export default function App() {
                         </div>
                       </div>
 
-                      {/* Action Buttons */}
                       <div className="pt-2 flex items-center gap-2">
                         <button
                           onClick={() => setSelectedTemple(temple)}
@@ -612,7 +637,6 @@ export default function App() {
               </div>
             )}
 
-            {/* View All link */}
             <div className="mt-12 text-center">
               <button
                 onClick={() => {
@@ -631,8 +655,127 @@ export default function App() {
           </div>
         </section>
 
+        {/* --- NEW SECTION: SACRED MANTRAS & CHALISAS --- */}
+        <section id="sacred-chants" className="py-16 sm:py-24 bg-[#FDFBF7] relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+              <div>
+                <div className="inline-flex items-center gap-2 text-xs font-bold text-amber-800 uppercase tracking-widest mb-1.5">
+                  <Music2 className="w-3.5 h-3.5 text-amber-700" />
+                  Divine Recitations & Stotrams
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#381014]">
+                  Sacred Mantras & Chalisas
+                </h2>
+                <p className="text-stone-600 text-sm sm:text-base mt-2 max-w-xl">
+                  Revered verses of power and devotion. Listen with lyrics, in-app seeking, and background continuous playback.
+                </p>
+              </div>
+
+              <Link
+                href="/chants"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-amber-950 bg-amber-100/80 hover:bg-amber-200/80 border border-amber-300/60 shadow-xs transition-all self-start md:self-auto group"
+              >
+                <span>View All Chants & Aartis</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            {/* Chants Grid Preview */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {FEATURED_CHANTS.map((chant) => (
+                <div
+                  key={chant.id}
+                  className="bg-white rounded-3xl overflow-hidden border border-amber-900/10 shadow-sm hover:shadow-xl hover:border-amber-400/50 transition-all flex flex-col justify-between group"
+                >
+                  <div>
+                    {/* Thumbnail banner */}
+                    <div className="relative aspect-video w-full overflow-hidden bg-stone-900">
+                      <img
+                        src={chant.thumbnail}
+                        alt={chant.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                        onError={(e) => {
+                          e.currentTarget.src = "https://images.unsplash.com/photo-1609803384069-1cac59620400?q=80&w=600&auto=format&fit=crop";
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      
+                      <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-amber-500/90 text-stone-950 text-[10px] font-bold uppercase tracking-wider shadow">
+                        {chant.badge}
+                      </span>
+
+                      <span className="absolute bottom-2.5 right-3 px-2 py-0.5 rounded bg-black/70 backdrop-blur-xs text-white text-[10px] font-mono">
+                        {chant.duration}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-5 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 border border-amber-200/60 px-2 py-0.5 rounded-md">
+                          {chant.deity}
+                        </span>
+                        <span className="text-[11px] text-stone-500">
+                          {chant.artist}
+                        </span>
+                      </div>
+
+                      <h3 className="font-serif font-bold text-lg text-[#250F13] group-hover:text-amber-800 transition-colors">
+                        {chant.title}
+                      </h3>
+
+                      <p className="text-xs text-stone-600 leading-relaxed font-light">
+                        {chant.tagline}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card Button leading straight to /chants */}
+                  <div className="p-5 pt-0">
+                    <Link
+                      href="/chants"
+                      className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#2A1114] to-[#3B171C] hover:from-[#3D181D] hover:to-[#4D1E24] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
+                    >
+                      <Play className="w-3.5 h-3.5 fill-current text-amber-400" />
+                      <span>Watch & Recite</span>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom Mini Banner */}
+            <div className="mt-8 p-4 rounded-2xl bg-amber-50/70 border border-amber-200/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-amber-600 text-white flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-stone-900">
+                    Sealed In-App Playback
+                  </p>
+                  <p className="text-[11px] text-stone-600">
+                    10-second skip controls, time scrubbing, and zero external redirects.
+                  </p>
+                </div>
+              </div>
+
+              <Link
+                href="/chants"
+                className="px-4 py-2 rounded-xl bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold transition-colors whitespace-nowrap shadow-xs"
+              >
+                Open Chants Library
+              </Link>
+            </div>
+
+          </div>
+        </section>
+
         {/* SECTION: Explore Temples by Region */}
-        <section id="regions" className="py-16 sm:py-24 bg-[#FDFBF7]">
+        <section id="regions" className="py-16 sm:py-24 bg-[#F5EDE1]/50 border-t border-amber-900/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div className="text-center max-w-3xl mx-auto mb-12">
@@ -684,7 +827,7 @@ export default function App() {
         </section>
 
         {/* SECTION: Popular Spiritual Yatras */}
-        <section id="yatras" className="py-16 sm:py-24 bg-[#F5EDE1]/60 border-t border-amber-900/10">
+        <section id="yatras" className="py-16 sm:py-24 bg-[#FDFBF7]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
@@ -757,10 +900,9 @@ export default function App() {
         </section>
 
         {/* SECTION: Devotee Services */}
-        <section id="services" className="py-16 sm:py-24 bg-[#FDFBF7]">
+        <section id="services" className="py-16 sm:py-24 bg-[#F5EDE1]/60 border-t border-amber-900/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            {/* Section Header */}
             <div className="text-center max-w-2xl mx-auto mb-14">
               <span className="text-xs font-bold uppercase tracking-widest text-amber-700">
                 Digital Facilitation
@@ -773,7 +915,6 @@ export default function App() {
               </p>
             </div>
 
-            {/* Services Grid with Direct Links */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {SERVICES_DATA.map((srv) => {
                 const IconComponent = srv.icon;
@@ -871,12 +1012,30 @@ export default function App() {
           </div>
         </section>
 
+        {/* SECTION: Digital Japa Mala Counter */}
+        <section className="py-16 bg-[#FDFBF7]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-xl mx-auto mb-10">
+              <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
+                Sacred Daily Sadhana
+              </span>
+              <h2 className="text-3xl font-serif font-bold text-[#381014] mt-1">
+                Digital Japa Mala Counter
+              </h2>
+              <p className="text-stone-600 text-sm mt-1">
+                Turn your phone into a Tulsi Mala. Complete your daily 108 chants with haptic bead feedback and chime resonance.
+              </p>
+            </div>
+
+            <DigitalJapaMala />
+          </div>
+        </section>
+
         {/* --- MODAL 1: LIVE DARSHAN VIDEO PLAYER MODAL --- */}
         {selectedTemple && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
             <div className="bg-[#1F1714] text-white w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl border border-amber-900/40 max-h-[92vh] flex flex-col">
 
-              {/* Modal Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black/40">
                 <div className="flex items-center gap-2.5">
                   <div className="w-3 h-3 rounded-full bg-rose-600 animate-ping" />
@@ -892,7 +1051,6 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Video Player Container */}
               <div className="relative aspect-video bg-black flex items-center justify-center">
                 {selectedTemple.isLive && (selectedTemple.embedVideoId || (selectedTemple as any).channelId) ? (
                   <LiveStreamPlayer
@@ -923,7 +1081,6 @@ export default function App() {
                 )}
               </div>
 
-              {/* Modal Details / Aarti Timings */}
               <div className="p-6 overflow-y-auto space-y-5 bg-[#261E1A]">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-4">
                   <div>
@@ -963,7 +1120,6 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Aarti Schedule Grid */}
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-amber-300 mb-2 flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5" /> Daily Temple Aarti Schedule
@@ -1075,25 +1231,6 @@ export default function App() {
             </div>
           </div>
         )}
-
-        <section className="py-16 bg-[#FDFBF7]">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center max-w-xl mx-auto mb-10">
-      <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
-        Sacred Daily Sadhana
-      </span>
-      <h2 className="text-3xl font-serif font-bold text-[#381014] mt-1">
-        Digital Japa Mala Counter
-      </h2>
-      <p className="text-stone-600 text-sm mt-1">
-        Turn your phone into a Tulsi Mala. Complete your daily 108 chants with haptic bead feedback and chime resonance.
-      </p>
-    </div>
-
-    {/* Japa Mala Widget */}
-    <DigitalJapaMala />
-  </div>
-</section>
 
       </div>
     </>
