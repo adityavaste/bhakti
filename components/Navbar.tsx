@@ -28,6 +28,7 @@ const NAV_LINKS: NavItem[] = [
   { label: "Temples", href: "/temples", icon: Landmark },
   { label: "Spiritual Trips", href: "/trips", icon: Compass },
   { label: "jap mala", href: "/japa", icon: Compass },
+  { label: "🔱", href: "/chants", icon: Compass },
   
 ];
 
